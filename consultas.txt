@@ -1,0 +1,27 @@
+CREATE DATABASE db_libreria;
+
+CREATE TABLE Alumno (IdAlumno int PRIMARY KEY AUTO_INCREMENT, NombreAlumno varchar(50), Apellidos varchar(50), Carrera varchar(50));
+CREATE TABLE Libro (IdLibro int PRIMARY KEY AUTO_INCREMENT, NombreLibro varchar(50), Editorial varchar(50), Dias_limite_prestamo int);
+CREATE TABLE Prestamo (IdPrestamo int PRIMARY KEY AUTO_INCREMENT, CONSTRAINT IdAlumno FOREIGN KEY (IdAlumno) REFERENCES alumno(IdAlumno), CONSTRAINT IdLibro FOREIGN KEY (IdLibro) REFERENCES libro(IdLibro), Fecha_prestamo datetime, Entregado bit);
+
+INSERT INTO alumno(IdAlumno, NombreAlumno, Apellidos, Carrera) VALUES (1, "Rosa","Torres", "Sistemas");
+INSERT INTO alumno(IdAlumno, NombreAlumno, Apellidos, Carrera) VALUES (2, "Ángel","Pérez", "Electrónica");
+INSERT INTO alumno(IdAlumno, NombreAlumno, Apellidos, Carrera) VALUES (3, "Sonia","Ríos", "Industrial");
+
+INSERT INTO libro(IdLibro, NombreLibro, Editorial, Dias_limite_prestamo) VALUES (1, "Administración", "Norma", 30);
+INSERT INTO libro(IdLibro, NombreLibro, Editorial, Dias_limite_prestamo) VALUES (2, "Redes neuronales", "Santillana", 30);
+INSERT INTO libro(IdLibro, NombreLibro, Editorial, Dias_limite_prestamo) VALUES (3, "Estadística", "Regio", 10);
+INSERT INTO libro(IdLibro, NombreLibro, Editorial, Dias_limite_prestamo) VALUES (4, "Desarrollo Web", "Limusa", 10);
+
+INSERT INTO prestamo(IdPrestamo, IdAlumno, IdLibro, Fecha_prestamo, Entregado) VALUES (1, 1, 1, "23/07/2021", false);
+INSERT INTO prestamo(IdPrestamo, IdAlumno, IdLibro, Fecha_prestamo, Entregado) VALUES (2, 1, 2, "22/07/2021", false);
+INSERT INTO prestamo(IdPrestamo, IdAlumno, IdLibro, Fecha_prestamo, Entregado) VALUES (3, 1, 3, "15/06/2021", false);
+INSERT INTO prestamo(IdPrestamo, IdAlumno, IdLibro, Fecha_prestamo, Entregado) VALUES (4, 2, 1, "12/07/2021", false);
+INSERT INTO prestamo(IdPrestamo, IdAlumno, IdLibro, Fecha_prestamo, Entregado) VALUES (5, 3, 1, "28/07/2021", true);
+INSERT INTO prestamo(IdPrestamo, IdAlumno, IdLibro, Fecha_prestamo, Entregado) VALUES (6, 3, 2, "16/07/2021", true);
+INSERT INTO prestamo(IdPrestamo, IdAlumno, IdLibro, Fecha_prestamo, Entregado) VALUES (7, 3, 3, "28/07/2021", true);
+INSERT INTO prestamo(IdPrestamo, IdAlumno, IdLibro, Fecha_prestamo, Entregado) VALUES (8, 3, 4, "10/05/2021", false);
+INSERT INTO prestamo(IdPrestamo, IdAlumno, IdLibro, Fecha_prestamo, Entregado) VALUES (9, 2, 2, "28/07/2021", false);
+INSERT INTO prestamo(IdPrestamo, IdAlumno, IdLibro, Fecha_prestamo, Entregado) VALUES (10, 3, 2, "05/04/2021", false);
+
+SELECT * FROM prestamo WHERE IdAlumno = 3 and Entregado = false and Fecha_prestamo < '2021/07/30'
